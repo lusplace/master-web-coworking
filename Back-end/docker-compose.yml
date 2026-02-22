@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: coworking_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-coworking_db}
+      MYSQL_USER: ${MYSQL_USER:-coworking_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-coworking_pass}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpass}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-coworking_db}
+      MYSQL_USER: ${MYSQL_USER:-coworking_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-coworking_pass}
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      SECRET_KEY: ${SECRET_KEY:-django-insecure-dev-key-change-in-production}
+      DEBUG: ${DEBUG:-1}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+volumes:
+  mysql_data:
