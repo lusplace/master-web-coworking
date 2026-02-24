@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    container_name: coworking_frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
