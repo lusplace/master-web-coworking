@@ -1,4 +1,18 @@
+import Carousel from './components/carousel/carousel';
+import FooterComponent from './components/footer/footer';
+import Navbar from './components/navbar/NavBar';
+
 function App() {
+  return <>
+  <Navbar/>
+  <h1>hiiiii</h1>
+    <DefaultApp/>
+      <Carousel/>
+    <FooterComponent/>
+  </>
+}
+
+function DefaultApp(){
   return (
     <div style={{
       display: 'flex',
@@ -7,8 +21,8 @@ function App() {
       justifyContent: 'center',
       minHeight: '100vh',
       fontFamily: 'system-ui, -apple-system, sans-serif',
-      backgroundColor: '#f5f5f5'
-    }}>
+      //backgroundColor: '#f5f5f5'
+    }} className='cross'>
       <h1 style={{
         fontSize: '3rem',
         color: '#333',

@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+:root{
+    --bg-color: #010203;
+    --bg-sec: #1D1D1F;
+    --bg-focus: #3B3130;
+    --text-sec: #B16C04;
+    --text-focus: #D3AC2C;
+    --text-main2: #ffe48b;
+    --text-main: #fff3cc;
+
+    --grid-size: 64px;
+    --line-width: 2px;
+    --angle: 45deg;
+}
+body.dark{
+    --bg-color: #ddeeff;
+    --bg-sec: #b3b3ff;
+    --bg-focus: #ffd2ce;
+    --text-sec: #B16C04;
+    --text-main: #D3AC2C;
+}
+
+body{
+    width: 100%;
+    background-color: var(--bg-color);
+
+    background-image: repeating-linear-gradient(
+      var(--angle), 
+      transparent 0,
+      transparent calc(var(--grid-size) - var(--line-width)),
+      var(--bg-sec) calc(var(--grid-size) - var(--line-width)),
+      var(--bg-sec) var(--grid-size)
+    ),
+    repeating-linear-gradient(
+      calc(var(--angle) + 90deg), 
+      transparent 0,
+      transparent calc(var(--grid-size) - var(--line-width)),
+      var(--bg-focus) calc(var(--grid-size) - var(--line-width)),
+      var(--bg-focus) var(--grid-size)
+    );
+    line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+
+body::after{
+    background-color: var(--bg-color);
+    background: radial-gradient(rgba(255, 0, 0, 0), var(--bg-color));
+    content: "";
+    top: 0%;
+    left:0%;
+    width: 100%;
+    height:100%;
+    
+    z-index: -1;
+    position: fixed;
+}
+
+
