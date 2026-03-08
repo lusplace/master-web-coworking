@@ -2,9 +2,12 @@
 Serializadores para la gestión de usuarios.
 """
 
-from django.contrib.auth.models import User, Group
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+
+User = get_user_model()
 
 
 class GroupSerializer(serializers.ModelSerializer):

@@ -3,8 +3,8 @@ Vistas para la gestión de usuarios.
 Incluye autenticación, registro y administración de usuarios.
 """
 
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User, Group
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.models import Group
 from rest_framework import generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -28,9 +28,11 @@ class RegisterView(generics.CreateAPIView):
     POST /api/users/register/
     Acceso público.
     """
-    queryset = User.objects.all()
     serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return get_user_model().objects.all()
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -105,9 +107,11 @@ class UserListView(generics.ListAPIView):
     GET /api/users/
     Solo administradores.
     """
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminGroup]
+
+    def get_queryset(self):
+        return get_user_model().objects.all()
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -117,8 +121,10 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     - Ver/Actualizar: Admin o el propio usuario
     - Eliminar: Solo admin
     """
-    queryset = User.objects.all()
     permission_classes = [IsAuthenticated, IsOwnerOrAdmin]
+
+    def get_queryset(self):
+        return get_user_model().objects.all()
 
     def get_serializer_class(self):
         if self.request.method in ['PUT', 'PATCH']:
@@ -180,6 +186,7 @@ def assign_group_view(request, user_id):
     
     Body: { "group_name": "Administradores" | "Empleados" }
     """
+    User = get_user_model()
     try:
         user = User.objects.get(pk=user_id)
     except User.DoesNotExist:

@@ -10,7 +10,6 @@ import time
 # Configurar Django ANTES de importar cualquier cosa de Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
-import django
 from django.core.management import execute_from_command_line
 
 def wait_for_db():
@@ -23,7 +22,6 @@ def run_migrations():
     """Ejecuta las migraciones de Django."""
     print("\nEjecutando migraciones...")
     try:
-        execute_from_command_line(['manage.py', 'makemigrations'])
         execute_from_command_line(['manage.py', 'migrate'])
         print("✓ Migraciones completadas")
     except Exception as e:
@@ -34,7 +32,7 @@ def create_superuser():
     """Crea un superusuario si no existe."""
     print("\nCreando superusuario si no existe...")
     
-    # Django ya está configurado al inicio del script
+    import django
     django.setup()
     
     try:
