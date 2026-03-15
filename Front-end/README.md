@@ -9,6 +9,13 @@ Estructura básica de frontend con React, Vite y Docker.
 
 ## Desarrollo con Docker
 
+
+### Levantar el proyecto
+
+```bash
+docker-compose up --build
+```
+
 ### Iniciar el proyecto
 
 ```bash

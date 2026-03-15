@@ -118,7 +118,7 @@ class LoginSerializer(serializers.Serializer):
     """
     Serializador para autenticación de usuarios.
     """
-    username = serializers.CharField(required=True)
+    correo = serializers.EmailField(required=True)
     password = serializers.CharField(
         required=True,
         style={'input_type': 'password'}

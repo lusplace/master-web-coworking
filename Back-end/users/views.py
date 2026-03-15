@@ -59,10 +59,10 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        username = serializer.validated_data['username']
+        correo = serializer.validated_data['correo']
         password = serializer.validated_data['password']
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=correo, password=password)
 
         if user is not None:
             if user.is_active:

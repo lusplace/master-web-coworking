@@ -39,9 +39,15 @@ def create_superuser():
         from django.contrib.auth import get_user_model
         User = get_user_model()
         
-        if not User.objects.filter(username='admin').exists():
-            User.objects.create_superuser('admin', 'admin@universidadeuropea.com', 'admin123')
-            print('✓ Superusuario creado: admin/admin123')
+        admin_email = 'admin@universidadeuropea.com'
+        if not User.objects.filter(correo=admin_email).exists():
+            User.objects.create_superuser(
+                correo=admin_email,
+                password='admin123',
+                username='admin',
+                nombre='Administrador'
+            )
+            print(f'✓ Superusuario creado: {admin_email} / admin123')
         else:
             print('✓ El superusuario ya existe')
     except Exception as e:
@@ -61,13 +67,16 @@ def start_server():
 
 def main():
     """Función principal del entrypoint."""
-    print("="*60)
-    print("COWORKING PROJECT - Inicialización")
-    print("="*60)
+    # Solo ejecutar migraciones y crear superusuario en el proceso principal
+    if os.environ.get('RUN_MAIN') != 'true':
+        print("="*60)
+        print("COWORKING PROJECT - Inicialización")
+        print("="*60)
+        
+        wait_for_db()
+        run_migrations()
+        create_superuser()
     
-    wait_for_db()
-    run_migrations()
-    create_superuser()
     start_server()
 
 if __name__ == '__main__':
