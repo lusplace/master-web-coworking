@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './NavBar.css';
+import useLocalStorage from "../../hooks/useLocalStorage.js";
 
 export default function Navbar() {
   const [stickyClass, setStickyClass] = useState('');
-  const [openMenu, setBurguerMenuOpen] = useState(false);
+  const [openMenu, setBurgerMenuOpen] = useState(false);
+  const [login, setLogin] = useLocalStorage('token', 'potato');
 
   useEffect(() => {
     window.addEventListener('scroll', stickNavbar);
@@ -23,7 +25,7 @@ export default function Navbar() {
     if (window !== undefined) {
         let windowWidth = window.innerWidth;
         // window width changed
-        windowWidth > 768 && setBurguerMenuOpen(false);
+        windowWidth > 768 && setBurgerMenuOpen(false);
     }
 
   }
@@ -51,6 +53,7 @@ onresize = (event) => { }
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
+                {login != null && <li><a href="#">Login</a></li>}
             </ul>
         </nav>;
 }

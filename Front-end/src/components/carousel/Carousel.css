@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.carousel {
+
+    padding: 20px;
+
+    margin: 0;
+
+    display: flex;
+    transition: all 0.35s ease 0s;
+}
+
+.carousel-card {
+    /*min-width: 33%;*/
+    /*height: 600px;*/
+}
+
+.carousel-card-content {
+    position: relative;
+    width: 800px;
+    height: 100%;
+    background-size: cover;
+    transition: transform 1s cubic-bezier(.165,.84,.44,1);
+    z-index: 1;
+    box-shadow: 0px 0px 5px #1D1D1F;
+}
+
+.carousel-card:not(.active) .carousel-card-content {
+    transform: scale(0.9);
+    filter: blur(5px);
+    z-index: 0;
+    transition: transform 1s cubic-bezier(.165,.84,.44,1);
+    opacity: 20%;
+    -webkit-transition-duration: 700ms;
+    -moz-transition-duration: 700ms;
+    -o-transition-duration: 700ms;
+    transition-duration: 700ms;
+}
+
+.dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.dot {
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+}
+
+.dot:hover {
+    cursor: pointer
+}
+
+.dot:not(:last-child) {
+    margin-right: 10px;
+}
+
+.dot.active {
+    background-color: #c9c9c9;
+    transition: all 0.35s ease 0s;
+    border-radius: 10px;
+}
+
+.dot:not(.active) {
+    background-color: #545454;
+    transition: all 0.35s ease 0s;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.button-group > * {
+    height: 32px;
+    width: 77px;
+    border: none;
+}
+
+.button-group button {
+    background-color: #060606;
+    color: #e5e5e5;
+}
+
+.button-group button:hover {
+    cursor: pointer
+}
+
+.button-group button:disabled {
+    opacity: 0.5
+}
+
+.button-group button:is(:first-child) {
+    margin-right: 20px
+}

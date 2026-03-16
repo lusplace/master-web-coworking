@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
 :root{
     --bg-color: #010203;
@@ -14,6 +14,13 @@
     --line-width: 2px;
     --angle: 45deg;
 }
+
+.momo-trust-display-regular {
+    font-family: "Momo Trust Display", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 body.dark{
     --bg-color: #ddeeff;
     --bg-sec: #b3b3ff;
@@ -45,16 +52,36 @@ body{
 }
 
 body::after{
-    background-color: var(--bg-color);
     background: radial-gradient(rgba(255, 0, 0, 0), var(--bg-color));
     content: "";
-    top: 0%;
-    left:0%;
+    top: 0;
+    left: 0;
     width: 100%;
     height:100%;
-    
+
     z-index: -1;
     position: fixed;
+}
+
+.titleCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.title{
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.subtitle{
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    max-width: 600px;
 }
 
 
