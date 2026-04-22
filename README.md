@@ -49,6 +49,15 @@ docker-compose down -v
 | Backend | 8000 | API Django |
 | Frontend | 5173 | Aplicación React (Vite) |
 
+## Guía de la API (Endpoints)
+
+| Recurso  | Endpoint Base | Métodos | Descripción|
+|----------|---------------|---------|------------|
+|Sedes:    |/api/coworking/sedes/ | GET, POST | Centros de coworking.|
+|Espacios: | /api/coworking/espacios/ | GET, POST | Salas y escritorios.|
+|Reservas: | /api/coworking/reservas/ | GET, POST | Gestión de bookings.|
+|Pagos:    | /api/coworking/pagos/ | GET, POST | Transacciones.|
+
 ## Estructura del proyecto
 
 ```
