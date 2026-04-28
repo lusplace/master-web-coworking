@@ -10,6 +10,15 @@ import time
 # Configurar Django ANTES de importar cualquier cosa de Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
+from dotenv import load_dotenv
+
+load_dotenv() # will search for .env file in local folder and load variables
+
+DJANGO_SUPERUSER_USERNAME = os.getenv('DJANGO_SUPERUSER_USERNAME')
+DJANGO_SUPERUSER_PASSWORD = os.getenv('DJANGO_SUPERUSER_PASSWORD')
+DJANGO_SUPERUSER_EMAIL = os.getenv('DJANGO_SUPERUSER_EMAIL')
+DJANGO_SUPERUSER_FIRST_NAME = os.getenv('DJANGO_SUPERUSER_FIRST_NAME')
+
 from django.core.management import execute_from_command_line
 
 def wait_for_db():
@@ -39,15 +48,15 @@ def create_superuser():
         from django.contrib.auth import get_user_model
         User = get_user_model()
         
-        admin_email = 'admin@universidadeuropea.com'
+        admin_email = DJANGO_SUPERUSER_EMAIL
         if not User.objects.filter(correo=admin_email).exists():
             User.objects.create_superuser(
-                correo=admin_email,
-                password='admin123',
-                username='admin',
-                nombre='Administrador'
+                correo=DJANGO_SUPERUSER_EMAIL,
+                password=DJANGO_SUPERUSER_PASSWORD
+                username=DJANGO_SUPERUSER_USERNAME
+                nombre=DJANGO_SUPERUSER_FIRST_NAME
             )
-            print(f'✓ Superusuario creado: {admin_email} / admin123')
+            print(f'✓ Superusuario creado: {DJANGO_SUPERUSER_USERNAME} ')
         else:
             print('✓ El superusuario ya existe')
     except Exception as e:
